@@ -1,0 +1,5 @@
+/home/z004fa8m/Projects/rustWorks/enums/target/rls/debug/deps/enums-18c098a259552a9a.rmeta: src/main.rs
+
+/home/z004fa8m/Projects/rustWorks/enums/target/rls/debug/deps/enums-18c098a259552a9a.d: src/main.rs
+
+src/main.rs:
