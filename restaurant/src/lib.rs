@@ -1,22 +1,5 @@
-mod front_of_house {
-    pub mod hosting {
-        pub fn add_to_waitlist() {}
-
-        fn seat_at_table() { 
-            add_to_waitlist(); 
-        }
-            
-    }
-
-    mod serving {
-        fn take_order() {}
-
-        fn serve_order() {}
-
-        fn take_payment() {}
-    }
-    
-}
+mod front_of_house;
+pub use crate::front_of_house::hosting;
 
 fn serve_order() {}
 
@@ -68,12 +51,16 @@ pub fn eat_at_restaurant() {
     let order2 = back_of_house::Appetizer::Salad;
 }
 
-use self::front_of_house::hosting;
+// use self::front_of_house::hosting;
 
 // This function is here to demonstrate usage of `use` keyword.
 pub fn eat_at_restaurant_2(){
     hosting::add_to_waitlist();
 }
+// If we call it with `pub` this means re exporting.
+// External code can now call the `hosting::add_to_waitlist`
+// pub use crate::front_of_house::hosting;
+
 // If we are bringing structs and enums with use we specify the full path,
 // Instead of bringing parent module. 
 
