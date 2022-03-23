@@ -67,3 +67,40 @@ pub fn eat_at_restaurant() {
     let order1 = back_of_house::Appetizer::Soup;
     let order2 = back_of_house::Appetizer::Salad;
 }
+
+use self::front_of_house::hosting;
+
+// This function is here to demonstrate usage of `use` keyword.
+pub fn eat_at_restaurant_2(){
+    hosting::add_to_waitlist();
+}
+// If we are bringing structs and enums with use we specify the full path,
+// Instead of bringing parent module. 
+
+use std::collections::HashMap;
+
+fn demonstrate(){
+    let mut map = HashMap::new();
+    map.insert(1,2);
+}
+
+// If we are going to use two items with the same name, we need to use them with parents. 
+
+use std::fmt;
+use std::io;
+
+// fn function1() -> fmt::Result {}
+// fn function2() -> io::Result<()> {}
+
+// Using the Glob operator 
+// use std::collections::*;
+// Using nested lists
+// use std::{cmp::Ordering, io};
+// Line below brings the `io` and `Write`
+// use std::io::{self, Write};
+
+use rand::Rng;
+
+fn rand() {
+    let secret_number = rand::thread_rng().gen_range(1..101);
+}
