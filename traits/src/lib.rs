@@ -51,6 +51,7 @@ pub mod aggregator {
     }
     // This is a demonstration of implementing conditional method with a trait.
     // This method only works for the `Pair` which implements `Display + PartialOrd` traits.
+    // Similar to this usage, Rust's `ToString` method only implemented for the types which implement `Display` trait.
     impl <T: Display + PartialOrd> Pair<T> {
         fn cmp_display(&self) {
             if self.x > self.y {
