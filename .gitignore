@@ -7,4 +7,5 @@
 **/collections/target/
 **/error_handling/target/
 **/traits/target/
-**/generics/target
+**/generics/target/
+**/lifetimes/target/
