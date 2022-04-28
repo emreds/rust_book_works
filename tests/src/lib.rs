@@ -10,10 +10,30 @@ impl Rectangle {
     }
 }
 
-fn greeting(name: &str) -> String {
+struct Guess {
+    value: i32
+}
+
+impl Guess {
+    pub fn new (value: i32) -> Guess {
+        if value < 1 || value > 100 {
+            panic!("Guess value must be between 1 and 100, got {}.", value);
+        }
+
+        Guess{value: value}
+    }
+}
+
+
+pub fn greeting(name: &str) -> String {
     format!("Hello {}!", name)
 }
 
+// Line below indicates that cargo will only compile code below when there is a
+// test flag.
+// `cargo test -- --show-output` shows the output of the test functions.
+// Tests run in parallel by default. To run them in one thread, 
+// use `cargo test -- --test-threads=1`.
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -24,6 +44,7 @@ mod tests {
         assert_eq!(result, 4);
     }
 
+    // `cargo test larger_can_hold_smaller` only runs the test below.
     #[test]
     fn larger_can_hold_smaller() {
         let larger = Rectangle {
@@ -42,7 +63,35 @@ mod tests {
     #[test]
     fn greeting_contains() {
         let result = greeting("Carol");
-        assert!(result.contains("Carol"));
+        // In this way we can add messages to the test results.
+        assert!(
+            result.contains("Carol"),
+        "Greeting did not contain the name Carol. The received value was  `{}`",
+        result );
+    }
+    // Using `[should_panic(expected=xxxx)]` gives us a flexibility to understand 
+    // if test panics in the correct situation.
+    #[test]
+    #[should_panic(expected="Guess value must be less than or equal to 100")]
+    fn greater_than() {
+        Guess::new(200);
+    }
+
+    #[test]
+    fn it_works() -> Result<(), String> {
+        if 2 + 2 == 4 {
+            Ok(())
+        } else {
+            Err(String::from("two plus two gives an error"))
+        }
+    }
+    
+    #[test]
+    #[ignore]
+    // Using `[ignore]` we can ignore some tests in the regular testing case.
+    // `cargo test -- --ignored` runs the 'ignored' tests.
+    fn expensive_test() {
+        println!("Some expensive shit going on here.")
     }
 
 }
